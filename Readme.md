@@ -7,7 +7,7 @@ This is a simple python API endpoint for the Swiss Ephemeris library. It is a si
 1. Clone the repository:
 
 ```bash
-    git clone
+    git clone https://github.com/mohammad-ammad/swiss-Ephemeris-api.git
 ```
 
 2. Build the Docker image:
