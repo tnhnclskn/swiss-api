@@ -13,13 +13,13 @@ This is a simple Python API endpoint for the Swiss Ephemeris library. It is a RE
 2. **Build the Docker image:**
 
    ```bash
-   docker build -t pyswisseph-api .
+   sudo docker build -t pyswisseph-api .
    ```
 
 3. **Run the Docker container:**
 
    ```bash
-   docker run -p 5000:5000 pyswisseph-api
+   sudo docker run -p 5000:5000 pyswisseph-api
    ```
 
 ## Installation Without Docker
@@ -51,7 +51,12 @@ Now you have an API running on `http://localhost:5000`. You can send POST reques
 ```bash
 curl -X POST http://localhost:5000/calculate_chart \
  -H "Content-Type: application/json" \
- -d '{"year": 1990, "month": 1, "day": 1, "hour": 12, "minute": 0, "latitude": 40.7128, "longitude": -74.0060}'
+ -d '{
+  "name": "John Doe",
+  "place_of_birth": "New York, USA",
+  "dob": "18/06/1998",
+  "time": "14:30"
+}'
 ```
 
 ### Using Postman
@@ -65,16 +70,14 @@ curl -X POST http://localhost:5000/calculate_chart \
 4.  Set the request body to JSON and enter the following data:
 
 ```json
-    {
-    "year": 1990,
-    "month": 1,
-    "day": 1,
-    "hour": 12,
-    "minute": 0,
-    "latitude": 40.7128,
-    "longitude": -74.0060
-    }
+{
+  "name": "John Doe",
+  "place_of_birth": "New York, USA",
+  "dob": "18/06/1998",
+  "time": "14:30" // optional
+}
 ```
+
 5. Click the Send button to make the request.
 
 6. You should see the response from the API with the astrological calculations.
