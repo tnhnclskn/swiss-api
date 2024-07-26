@@ -1,3 +1,4 @@
 pyswisseph
 Flask
 geopy
+flask-cors
