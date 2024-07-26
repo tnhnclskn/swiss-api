@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import swisseph as swe
 from datetime import datetime
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut, GeocoderUnavailable
 
 app = Flask(__name__)
+CORS(app)  # This enables CORS for all routes
 geolocator = Nominatim(user_agent="my_astrology_app")
 
 def get_zodiac_sign(longitude):
@@ -74,11 +76,11 @@ def calculate_chart():
             'longitude': longitude,
             'sign': get_zodiac_sign(longitude)
         }
-    
+
     # Calculate houses
     houses = swe.houses(jd, latitude, longitude)[0]
     ascendant = houses[0]
-    
+
     result = {
         'name': name,
         'place_of_birth': place_of_birth,
@@ -93,7 +95,7 @@ def calculate_chart():
             'sign': get_zodiac_sign(ascendant)
         }
     }
-    
+
     return jsonify(result)
 
 if __name__ == '__main__':
