@@ -1,3 +1,10 @@
+# Swiss Ephemeris API and WordPress Plugin
+
+This project consists of two main components:
+
+1. A Python-based REST API for the Swiss Ephemeris library
+2. A WordPress plugin that utilizes this API to provide astrological calculations
+
 # Swiss Ephemeris API
 
 This is a simple Python API endpoint for the Swiss Ephemeris library. It is a REST API that provides planetary positions for a given date and time.
