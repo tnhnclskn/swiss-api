@@ -81,3 +81,39 @@ curl -X POST http://localhost:5000/calculate_chart \
 5. Click the Send button to make the request.
 
 6. You should see the response from the API with the astrological calculations.
+
+# Astrology Sign Calculator WordPress Plugin
+
+This WordPress plugin provides an astrology sign calculator form that can be easily embedded into your posts or pages using a shortcode. It uses the Swiss Ephemeris API to calculate astrological signs based on user input.
+
+## Installation
+
+1. Download the plugin files and place them in a new directory named `astrology-calculator` in your WordPress plugins directory (`wp-content/plugins/`).
+
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+
+3. Use the shortcode `[astrology_calculator]` in any post or page where you want the calculator form to appear.
+
+## Configuration
+
+Before using the plugin, you need to set the correct API URL for the Swiss Ephemeris API:
+
+1. Open the file `wp-content/plugins/astrology-calculator/dist/index.js` in a text editor.
+
+2. Locate the line that sets the `API_URL` constant:
+
+   ```javascript
+   const API_URL = "YOUR_API_URL";
+   ```
+
+3. Replace the URL with the correct URL of your Swiss Ephemeris API. For example
+   
+      ```javascript
+      const API_URL = "https://your-api-domain.com";
+      ```
+
+4. Save the file.
+
+## Usage
+Once installed and configured, you can use the shortcode `[astrology_calculator]` in any post or page to display the astrology calculator form.
+The form allows users to input their name, place of birth, date of birth, and time of birth. When submitted, it will contact the Swiss Ephemeris API and display the calculated astrological signs.
