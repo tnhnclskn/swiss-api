@@ -334,11 +334,136 @@ function astrology_calculator_shortcode() {
               rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
           "
         >
-          <h1
-            id="result-heading"
-            class="text-gray-900 text-sm"
-          ></h1>
-          <p id="result-sign" class="text-lg text-gray-900"></p>
+          <h1 id="result-heading" class="text-gray-900 text-sm"></h1>
+          <p id="result-sign" class="text-xl text-gray-900"></p>
+          <hr/>
+          <div>
+            <h1 class="text-gray-900 text-lg font-bold">
+              Your Other Signs are:
+            </h1>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/sun.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-sun"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/moon.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-moon"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/mercury.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-mercury"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/venus.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-venus"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/mars.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-mars"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/jupiter.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-jupiter"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/saturn.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-saturn"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/uranus.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-uranus"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/neptune.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-neptune"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="<?php echo plugins_url('assets/pluto.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-pluto"></h3>
+              </div>
+
+              <div
+                class="rounded-md flex justify-center items-center flex-col p-4 cursor-pointer"
+                style="
+                  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                "
+              >
+                <img src="/<?php echo plugins_url('assets/asc.jpg', __FILE__); ?>" alt="" class="w-14" />
+                <h3 class="text-2xl text-gray-900" id="result-asc"></h3>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
