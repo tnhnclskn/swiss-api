@@ -26,9 +26,71 @@ const resultAsc = document.getElementById("result-asc");
 
 let formType = "";
 
-const API_URL = "YOUR_API_URL";
+const API_URL = "https://api.birthchartstore.com";
 
 [formContainer, resultContainer, errorContainer].forEach(el => el.style.display = "none");
+
+
+let allCities = [];
+
+const fetchCountriesAndCities = () => {
+  fetch('https://restcountries.com/v3.1/all')
+    .then(response => response.json())
+    .then(data => {
+      const citySelect = document.getElementById('city');
+      data.forEach(country => {
+        if (country.capital && country.capital.length > 0) {
+          const cityOption = `${country.capital[0]}, ${country.name.common}`;
+          allCities.push(cityOption);
+          const option = document.createElement('option');
+          option.value = cityOption;
+          option.textContent = cityOption;
+          citySelect.appendChild(option);
+        }
+      });
+      
+      convertSelectToDatalist();
+    })
+    .catch(error => console.error('Error fetching countries:', error));
+};
+
+const convertSelectToDatalist = () => {
+  const citySelect = document.getElementById('city');
+  const cityInput = document.createElement('input');
+  cityInput.type = 'text';
+  cityInput.id = 'city';
+  cityInput.name = 'city';
+  cityInput.setAttribute('list', 'cityList');
+  cityInput.placeholder = 'Type to search for a city';
+  cityInput.className = citySelect.className;
+
+  const datalist = document.createElement('datalist');
+  datalist.id = 'cityList';
+
+  citySelect.parentNode.replaceChild(cityInput, citySelect);
+  cityInput.parentNode.appendChild(datalist);
+
+  cityInput.addEventListener('input', filterCities);
+};
+
+const filterCities = (e) => {
+  const filterValue = e.target.value.toLowerCase();
+  const datalist = document.getElementById('cityList');
+  
+  datalist.innerHTML = '';
+
+  const filteredCities = allCities.filter(city => 
+    city.toLowerCase().includes(filterValue)
+  );
+
+  filteredCities.forEach(city => {
+    const option = document.createElement('option');
+    option.value = city;
+    datalist.appendChild(option);
+  });
+};
+
+fetchCountriesAndCities();
 
 const showForm = (title, imageSrc, type) => {
   formContainer.style.display = "block";
