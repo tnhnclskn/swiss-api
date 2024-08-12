@@ -55,6 +55,10 @@ def calculate_chart():
     
     jd = swe.utc_to_jd(year, month, day, hour, minute, 0, swe.GREG_CAL)[1]
     
+    # Calculate houses first
+    houses = swe.houses(jd, latitude, longitude)[0]
+    ascendant = houses[0]
+
     # Calculate positions for all planets
     planets = {
         'Sun': swe.SUN,
@@ -66,20 +70,20 @@ def calculate_chart():
         'Saturn': swe.SATURN,
         'Uranus': swe.URANUS,
         'Neptune': swe.NEPTUNE,
-        'Pluto': swe.PLUTO
+        'Pluto': swe.PLUTO,
+        'Ascendant': swe.ASC 
     }
 
     planet_positions = {}
     for planet_name, planet_id in planets.items():
-        longitude = calculate_planet_position(jd, planet_id)[0]
+        if planet_name == 'Ascendant':
+            longitude = ascendant  # Use the previously calculated ascendant
+        else:
+            longitude = calculate_planet_position(jd, planet_id)[0]
         planet_positions[planet_name] = {
             'longitude': longitude,
             'sign': get_zodiac_sign(longitude)
         }
-
-    # Calculate houses
-    houses = swe.houses(jd, latitude, longitude)[0]
-    ascendant = houses[0]
 
     result = {
         'name': name,
