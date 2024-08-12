@@ -333,8 +333,8 @@ function astrology_calculator_shortcode() {
           <h1 id="result-heading" class="text-gray-900 text-sm"></h1>
           <p id="result-sign" class="text-xl text-gray-900"></p>
           <hr/>
-          <div>
-            <h1 class="text-gray-900 text-lg font-bold">
+          <div >
+            <h1 class="text-gray-900 text-lg font-bold" style="margin: 25px 0px !important;">
               Your Other Signs are:
             </h1>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-5">

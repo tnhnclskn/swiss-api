@@ -34,22 +34,41 @@ const API_URL = "https://api.birthchartstore.com";
 let allCities = [];
 
 const fetchCountriesAndCities = () => {
-  fetch('https://restcountries.com/v3.1/all')
+  var headers = new Headers();
+  headers.append("X-CSCAPI-KEY", "MWRDbWJtMnFqZW5SbXNZUno1b0tMUDQ1MlprTzFGdVc0dERPVjlTTQ==");
+
+  var requestOptions = {
+    method: 'GET',
+    headers: headers,
+    redirect: 'follow'
+  };
+
+  fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
     .then(response => response.json())
-    .then(data => {
+    .then(countries => {
       const citySelect = document.getElementById('city');
-      data.forEach(country => {
-        if (country.capital && country.capital.length > 0) {
-          const cityOption = `${country.capital[0]}, ${country.name.common}`;
-          allCities.push(cityOption);
-          const option = document.createElement('option');
-          option.value = cityOption;
-          option.textContent = cityOption;
-          citySelect.appendChild(option);
-        }
-      });
       
-      convertSelectToDatalist();
+      // Use Promise.all to fetch cities for all countries concurrently
+      Promise.all(countries.map(country => 
+        fetch(`https://api.countrystatecity.in/v1/countries/${country.iso2}/cities`, requestOptions)
+          .then(response => response.json())
+          .then(cities => ({country, cities}))
+      ))
+      .then(results => {
+        results.forEach(({country, cities}) => {
+          cities.forEach(city => {
+            const cityOption = `${city.name}, ${country.name}`;
+            allCities.push(cityOption);
+            const option = document.createElement('option');
+            option.value = cityOption;
+            option.textContent = cityOption;
+            citySelect.appendChild(option);
+          });
+        });
+
+        convertSelectToDatalist();
+      })
+      .catch(error => console.error('Error fetching cities:', error));
     })
     .catch(error => console.error('Error fetching countries:', error));
 };
