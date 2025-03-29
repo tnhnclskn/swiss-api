@@ -33,15 +33,21 @@ def calculate_planet_position(jd, planet):
 @app.route('/calculate_chart', methods=['POST'])
 def calculate_chart():
     data = request.json
-    name = data['name']
-    place_of_birth = data['place_of_birth']
+    place_of_birth = data.get('place_of_birth', None)
+    latitude = data.get('latitude', None)
+    longitude = data.get('longitude', None)
     dob = data['dob']  # Expected format: "DD/MM/YYYY"
     time = data.get('time', '00:00')  # Optional, default to midnight if not provided
 
     # Get coordinates from place of birth
-    latitude, longitude = get_coordinates(place_of_birth)
+    if not place_of_birth and (latitude is None or longitude is None):
+        return jsonify({"error": "Place of birth or coordinates must be provided"}), 400
+    if place_of_birth:
+        latitude, longitude = get_coordinates(place_of_birth)
+        if latitude is None or longitude is None:
+            return jsonify({"error": "Unable to geocode the place of birth"}), 400
     if latitude is None or longitude is None:
-        return jsonify({"error": "Unable to geocode the place of birth"}), 400
+        return jsonify({"error": "Invalid coordinates"}), 400
 
     # Parse date and time
     dob_obj = datetime.strptime(dob, "%d/%m/%Y")
@@ -77,17 +83,15 @@ def calculate_chart():
     planet_positions = {}
     for planet_name, planet_id in planets.items():
         if planet_name == 'Ascendant':
-            longitude = ascendant  # Use the previously calculated ascendant
+            xlongitude = ascendant  # Use the previously calculated ascendant
         else:
-            longitude = calculate_planet_position(jd, planet_id)[0]
+            xlongitude = calculate_planet_position(jd, planet_id)[0]
         planet_positions[planet_name] = {
-            'longitude': longitude,
-            'sign': get_zodiac_sign(longitude)
+            'longitude': xlongitude,
+            'sign': get_zodiac_sign(xlongitude)
         }
 
     result = {
-        'name': name,
-        'place_of_birth': place_of_birth,
         'latitude': latitude,
         'longitude': longitude,
         'date_of_birth': dob,
@@ -97,10 +101,11 @@ def calculate_chart():
         'ascendant': {
             'longitude': ascendant,
             'sign': get_zodiac_sign(ascendant)
-        }
+        },
+        'houses': houses
     }
 
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=3000)

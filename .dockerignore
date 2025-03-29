@@ -1,0 +1,4 @@
+.dockerignore
+.gitignore
+compose.yml
+Dockerfile
